@@ -1,30 +1,31 @@
-
+# 读取档案
 products = []
+with open('products.csv', 'r', encoding='utf-8')as f:
+	for line in f:
+		if '商品,价格' in line:  
+			continue
+		name, price = line.strip().split(',')
+		products.append([name, price])
+print(products)	
+
+# 让使用者输入
 while True:
 	name = input('请输入商品名称:')
-	if name == 'q': # 离开
+	if name == 'q': 
 		break
-	products.append(name)
+	price = input('请输入商品价格:')
+	price = int(price)  
+	np = [name, price]
+	products.append(np) 
 print(products)
 
-products = []                           # 二维清单架构, 清单里有个清单
-while True:
-	name = input('请输入商品名称:')      # 不能交替放name和price
-	if name == 'q':                     
-		break
-	price = input('请输入商品价格:')     # 也不能分开放
+# 印出所有购买记录
+for p in products: 
+	print(p[0], '的价格是', p[1])
 
-	# np = []
-	# np.append(name)                     
-	# np.append(price)                    
-	np = [name, price]                  # 把name和price都装入小清单
-	products.append(np)                 # 把小清单装入大清单
-	# products.append([name, price])
-
-print(products)
-
-print(products[0][0])               # 存取二维清单
-                                    # 先走进大清单的第0格, 再走进小清单的第0格
-
-for product in products:            # 印出商品和价格         
-	print(product[0], '的价格是', product[1]) 
+# 写入档案
+with open('products.csv', 'w', encoding='utf-8') as f:  
+	f.write('商品,价格\n')
+	for p in products:
+		f.write(p[0] + ',' + str(p[1]) + '\n') 
+                              
