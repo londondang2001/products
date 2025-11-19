@@ -4,11 +4,27 @@ while True:
 	name = input('请输入商品名称:')
 	if name == 'q': # 离开
 		break
-	price = input('请输入商品价格:')
-	p = []
-	p.append(name) # 把商品名称装入小清单
-	p.append(price) # 把商品价格装入下清单
-	products.append(p) # 把小清单装入products清单
+	products.append(name)
+print(products)
 
-for product in products: # 用for loop印出products清单
-	print(product[0], '的价格是', product[1])
+products = []                           # 二维清单架构, 清单里有个清单
+while True:
+	name = input('请输入商品名称:')      # 不能交替放name和price
+	if name == 'q':                     
+		break
+	price = input('请输入商品价格:')     # 也不能分开放
+
+	# np = []
+	# np.append(name)                     
+	# np.append(price)                    
+	np = [name, price]                  # 把name和price都装入小清单
+	products.append(np)                 # 把小清单装入大清单
+	# products.append([name, price])
+
+print(products)
+
+print(products[0][0])               # 存取二维清单
+                                    # 先走进大清单的第0格, 再走进小清单的第0格
+
+for product in products:            # 印出商品和价格         
+	print(product[0], '的价格是', product[1]) 
